@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 10 112 112">
+  <!-- SomedayTundra igloo, Glacier Forest (light) gradient. Brick joints and the door outline are
+       true cut-outs (a mask), so the mark works on any background. -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#F1F7FD"/>
+      <stop offset="0.55" stop-color="#8DB6E2"/>
+      <stop offset="1" stop-color="#1F6BC0"/>
+    </linearGradient>
+    <mask id="cut" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="130">
+      <rect x="0" y="0" width="120" height="130" fill="#fff"/>
+      <path d="M0 79H120M0 66H120M0 53H120M22 79V92M98 79V92M30 66V79M90 66V79M36 53V66M60 53V66M84 53V66M50 40V53M70 40V53" stroke="#000" stroke-width="3.4" fill="none"/>
+      <!-- restore the door's face (no bricks through it), then cut its outline -->
+      <path d="M46 92V76A14 14 0 0 1 74 76V92Z" fill="#fff"/>
+      <path d="M46 92V76A14 14 0 0 1 74 76V92" stroke="#000" stroke-width="4" fill="none"/>
+    </mask>
+  </defs>
+  <path d="M8 92A52 52 0 0 1 112 92Z" fill="url(#g)" mask="url(#cut)"/>
+</svg>
