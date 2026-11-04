@@ -5,7 +5,7 @@ import { ThemeToggle } from '@somedaytundra/theme'
 import { useFamilyAccess } from '@/lib/family.ts'
 import { BULLDOG_SHUTTLE_URL, NHL_STATS_URL } from '@/lib/links.ts'
 
-const panel = 'rounded-[18px] border border-line bg-surface'
+const panel = 'rounded-[18px] border border-st-line bg-st-surface'
 
 type Project = {
     name: string
@@ -20,24 +20,24 @@ const PROJECTS: Project[] = [
         name: 'NHL Stats',
         blurb: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.',
         Icon: ChartColumn,
-        iconClass: 'bg-proj-nhl-soft text-proj-nhl',
-        linkClass: 'text-proj-nhl',
+        iconClass: 'bg-st-proj-nhl-soft text-st-proj-nhl',
+        linkClass: 'text-st-proj-nhl',
         href: NHL_STATS_URL,
     },
     {
         name: 'Bulldog Shuttle',
         blurb: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.',
         Icon: Bus,
-        iconClass: 'bg-proj-shuttle-soft text-proj-shuttle',
-        linkClass: 'text-proj-shuttle',
+        iconClass: 'bg-st-proj-shuttle-soft text-st-proj-shuttle',
+        linkClass: 'text-st-proj-shuttle',
         href: BULLDOG_SHUTTLE_URL,
     },
     {
         name: 'Dev Blog',
         blurb: 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.',
         Icon: Code,
-        iconClass: 'bg-proj-devblog-soft text-proj-devblog',
-        linkClass: 'text-proj-devblog',
+        iconClass: 'bg-st-proj-devblog-soft text-st-proj-devblog',
+        linkClass: 'text-st-proj-devblog',
         to: '/projects/dev-blog',
     },
 ]
@@ -50,10 +50,10 @@ const POSTS = [
 ]
 
 const ACTIVITY = [
-    { title: 'Nam libero tempore, cum soluta nobis', source: 'NHL Stats', dot: 'bg-proj-nhl' },
-    { title: 'Eligendi optio cumque nihil impedit', source: 'Bulldog Shuttle', dot: 'bg-proj-shuttle' },
-    { title: 'Quo minus id quod maxime placeat', source: 'Dev Blog', dot: 'bg-proj-devblog' },
-    { title: 'Facere possimus, omnis voluptas assumenda', source: 'Blog', dot: 'bg-muted' },
+    { title: 'Nam libero tempore, cum soluta nobis', source: 'NHL Stats', dot: 'bg-st-proj-nhl' },
+    { title: 'Eligendi optio cumque nihil impedit', source: 'Bulldog Shuttle', dot: 'bg-st-proj-shuttle' },
+    { title: 'Quo minus id quod maxime placeat', source: 'Dev Blog', dot: 'bg-st-proj-devblog' },
+    { title: 'Facere possimus, omnis voluptas assumenda', source: 'Blog', dot: 'bg-st-muted' },
 ]
 
 const cardLink = 'mt-auto inline-flex items-center gap-1.5 text-sm font-bold'
@@ -87,52 +87,52 @@ export default function Home() {
         <div className="flex flex-col gap-7 px-4 pt-7 pb-[170px] sm:px-[clamp(16px,3vw,44px)]">
             <div className="flex flex-wrap items-center justify-between gap-3.5">
                 <div className="flex flex-col gap-0.5">
-                    <span className="text-[12.5px] font-bold tracking-[0.08em] text-muted uppercase">Home</span>
+                    <span className="text-[12.5px] font-bold tracking-[0.08em] text-st-muted uppercase">Home</span>
                     <span className="font-display text-[15px] font-semibold">Lorem ipsum dashboard</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-2.5">
-                    <label className="flex min-h-11 w-[300px] max-w-full items-center gap-2 rounded-xl border border-line bg-surface px-3.5">
-                        <Search aria-hidden="true" className="size-[17px] text-muted" />
+                    <label className="flex min-h-11 w-[300px] max-w-full items-center gap-2 rounded-xl border border-st-line bg-st-surface px-3.5">
+                        <Search aria-hidden="true" className="size-[17px] text-st-muted" />
                         <span className="sr-only">Search</span>
                         <input
                             type="search"
                             placeholder="Search lorem, ipsum…"
-                            className="min-w-0 flex-1 border-0 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
+                            className="min-w-0 flex-1 border-0 bg-transparent text-sm text-st-ink outline-none placeholder:text-st-muted"
                         />
                     </label>
                     <ThemeToggle />
                     <button
                         type="button"
                         aria-label="Notifications"
-                        className="grid size-11 cursor-pointer place-items-center rounded-xl border border-line bg-surface text-ink-2"
+                        className="grid size-11 cursor-pointer place-items-center rounded-xl border border-st-line bg-st-surface text-st-ink-2"
                     >
                         <Bell aria-hidden="true" className="size-[19px]" />
                     </button>
                 </div>
             </div>
 
-            <section className="relative flex flex-col gap-4 overflow-hidden rounded-[22px] border border-line bg-surface-hero p-[clamp(24px,4vw,44px)] shadow-card backdrop-blur-[4px]">
-                <span className="inline-flex items-center gap-2 self-start rounded-full bg-accent-soft px-3 py-1.5 text-[12.5px] font-bold text-accent-soft-ink">
-                    <span aria-hidden="true" className="size-1.5 rounded-full bg-accent shadow-[0_0_8px_var(--accent)]" />
+            <section className="relative flex flex-col gap-4 overflow-hidden rounded-[22px] border border-st-line bg-st-surface-hero p-[clamp(24px,4vw,44px)] shadow-st-card backdrop-blur-[4px]">
+                <span className="inline-flex items-center gap-2 self-start rounded-full bg-st-accent-soft px-3 py-1.5 text-[12.5px] font-bold text-st-accent-soft-ink">
+                    <span aria-hidden="true" className="size-1.5 rounded-full bg-st-accent shadow-[0_0_8px_var(--st-accent)]" />
                     Lorem ipsum · dolor sit
                 </span>
                 <h1 className="m-0 max-w-[18ch] font-display text-[clamp(28px,3.4vw,42px)] leading-[1.12] font-bold tracking-[-0.02em]">
                     Lorem ipsum dolor sit amet, consectetur.
                 </h1>
-                <p className="m-0 max-w-[60ch] text-base leading-relaxed text-ink-2">
+                <p className="m-0 max-w-[60ch] text-base leading-relaxed text-st-ink-2">
                     Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
                     aperiam, eaque ipsa quae ab illo inventore veritatis.
                 </p>
                 <div className="flex flex-wrap gap-2.5">
                     <button
                         type="button"
-                        className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[10px] border border-accent bg-accent px-[18px] text-[14.5px] font-bold text-accent-ink"
+                        className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-[10px] border border-st-accent bg-st-accent px-[18px] text-[14.5px] font-bold text-st-accent-ink"
                     >
                         Lorem action <ArrowRight aria-hidden="true" className="size-4" />
                     </button>
                     <button
                         type="button"
-                        className="inline-flex min-h-11 cursor-pointer items-center rounded-[10px] border border-line bg-transparent px-[18px] text-[14.5px] font-bold text-ink"
+                        className="inline-flex min-h-11 cursor-pointer items-center rounded-[10px] border border-st-line bg-transparent px-[18px] text-[14.5px] font-bold text-st-ink"
                     >
                         Ipsum secondary
                     </button>
@@ -150,7 +150,7 @@ export default function Home() {
                                 <project.Icon className="size-[22px]" />
                             </span>
                             <h3 className="m-0 text-[16.5px] font-extrabold">{project.name}</h3>
-                            <p className="m-0 text-sm leading-normal text-muted">{project.blurb}</p>
+                            <p className="m-0 text-sm leading-normal text-st-muted">{project.blurb}</p>
                             <ProjectLink project={project} />
                         </article>
                     ))}
@@ -166,10 +166,10 @@ export default function Home() {
                                 <li key={title}>
                                     <Link
                                         to="/blog"
-                                        className="flex justify-between gap-4 border-t border-line-soft py-3 text-ink no-underline"
+                                        className="flex justify-between gap-4 border-t border-st-line-soft py-3 text-st-ink no-underline"
                                     >
                                         <span className="text-[14.5px] font-bold">{title}</span>
-                                        <span className="shrink-0 text-[13px] text-muted">[Date]</span>
+                                        <span className="shrink-0 text-[13px] text-st-muted">[Date]</span>
                                     </Link>
                                 </li>
                             ))}
@@ -184,7 +184,7 @@ export default function Home() {
                                 <span aria-hidden="true" className={`mt-1.5 size-[9px] shrink-0 rounded-full ${item.dot}`} />
                                 <span className="flex flex-col gap-0.5">
                                     <span className="text-[14.5px] font-bold">{item.title}</span>
-                                    <span className="text-[13px] text-muted">{item.source} · [Time ago]</span>
+                                    <span className="text-[13px] text-st-muted">{item.source} · [Time ago]</span>
                                 </span>
                             </li>
                         ))}

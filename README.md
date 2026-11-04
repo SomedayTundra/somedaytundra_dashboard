@@ -51,7 +51,7 @@ Bulldog Shuttle (the next free port, 5174 when NHL Stats is up).
   (`theme.css`, imported by `src/index.css`), `ThemeProvider`/`useTheme`, `ThemeToggle`, the
   backdrops, `IglooMark` and `Wordmark`, and the Clerk colors. Its README has the details. What
   stays here is the dashboard's own UI, including the theme cards in Settings › Appearance.
-- Pages use the theme's Tailwind names (`bg-surface`, `text-ink`, `text-muted` and so on), never a
+- Pages use the theme's Tailwind names (`bg-st-surface`, `text-st-ink`, `text-st-muted` and so on), never a
   theme's raw colors.
 - The theme and motion setting persist in localStorage under `st.theme` and `st.motion`. The
   `somedaytundraTheme()` plugin in `vite.config.ts` applies them before first paint, so a reload

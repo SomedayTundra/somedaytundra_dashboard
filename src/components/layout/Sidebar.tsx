@@ -8,7 +8,7 @@ import { BULLDOG_SHUTTLE_URL, NHL_STATS_URL } from '@/lib/links.ts'
 import { useLocalStorageState } from '@/lib/useLocalStorageState.ts'
 
 const navItem =
-    'flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-[10px] px-3 text-left text-[14.5px] font-semibold text-ink-2 transition-colors hover:bg-nav-hover hover:text-ink data-[status=active]:bg-accent-soft data-[status=active]:text-accent-soft-ink'
+    'flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-[10px] px-3 text-left text-[14.5px] font-semibold text-st-ink-2 transition-colors hover:bg-st-nav-hover hover:text-st-ink data-[status=active]:bg-st-accent-soft data-[status=active]:text-st-accent-soft-ink'
 
 const childItem = `${navItem} text-[14px]`
 
@@ -50,7 +50,7 @@ export default function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
     return (
         <nav
             aria-label="Primary"
-            className="flex h-full flex-col justify-between gap-7 overflow-y-auto border-r border-line bg-sidebar px-4 py-[18px] backdrop-blur-md"
+            className="flex h-full flex-col justify-between gap-7 overflow-y-auto border-r border-st-line bg-st-sidebar px-4 py-[18px] backdrop-blur-md"
         >
             <div className="flex flex-col gap-[22px]">
                 <AuthCard />
@@ -75,20 +75,20 @@ export default function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
                         />
                     </button>
                     {projectsOpen && (
-                        <div id="sidebar-projects" className="mt-0.5 mb-1 ml-[21px] flex flex-col gap-0.5 border-l-[1.5px] border-line pl-3">
+                        <div id="sidebar-projects" className="mt-0.5 mb-1 ml-[21px] flex flex-col gap-0.5 border-l-[1.5px] border-st-line pl-3">
                             <ExternalNavLink
                                 href={NHL_STATS_URL}
-                                icon={<ChartColumn aria-hidden="true" className={clsx(childIconClass, 'text-proj-nhl')} />}
+                                icon={<ChartColumn aria-hidden="true" className={clsx(childIconClass, 'text-st-proj-nhl')} />}
                                 label="NHL Stats"
                             />
                             <ExternalNavLink
                                 href={BULLDOG_SHUTTLE_URL}
-                                icon={<Bus aria-hidden="true" className={clsx(childIconClass, 'text-proj-shuttle')} />}
+                                icon={<Bus aria-hidden="true" className={clsx(childIconClass, 'text-st-proj-shuttle')} />}
                                 label="Bulldog Shuttle"
                             />
                             <NavLink
                                 to="/projects/dev-blog"
-                                icon={<Code aria-hidden="true" className={clsx(childIconClass, 'text-proj-devblog')} />}
+                                icon={<Code aria-hidden="true" className={clsx(childIconClass, 'text-st-proj-devblog')} />}
                                 label="Dev Blog"
                                 onNavigate={onNavigate}
                                 className={childItem}
@@ -98,7 +98,7 @@ export default function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-0.5 border-t border-line-soft pt-3.5">
+            <div className="flex flex-col gap-0.5 border-t border-st-line-soft pt-3.5">
                 <NavLink to="/settings" icon={<SlidersHorizontal aria-hidden="true" className={iconClass} />} label="Settings" onNavigate={onNavigate} />
                 <NavLink to="/help" icon={<CircleHelp aria-hidden="true" className={iconClass} />} label="Help" onNavigate={onNavigate} />
             </div>

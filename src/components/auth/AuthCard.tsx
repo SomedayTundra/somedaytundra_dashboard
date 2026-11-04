@@ -4,7 +4,7 @@ import { ChevronsUpDown } from 'lucide-react'
 import { IglooMark, Wordmark } from '@somedaytundra/theme'
 import { CLERK_ENABLED } from '@/lib/clerk.ts'
 
-const cardClass = 'w-full rounded-2xl border border-line bg-surface shadow-card'
+const cardClass = 'w-full rounded-2xl border border-st-line bg-st-surface shadow-st-card'
 
 function SignedOutCard({ onClick, note, disabled }: { onClick?: () => void; note: string; disabled?: boolean }) {
     return (
@@ -16,7 +16,7 @@ function SignedOutCard({ onClick, note, disabled }: { onClick?: () => void; note
         >
             <IglooMark width={64} height={51} />
             <Wordmark size="md" />
-            <span className="text-[12.5px] font-semibold text-muted">{note}</span>
+            <span className="text-[12.5px] font-semibold text-st-muted">{note}</span>
         </button>
     )
 }
@@ -32,12 +32,12 @@ const userButtonAppearance = {
             padding: '12px 40px 12px 14px',
             borderRadius: 0,
             '&:focus': { boxShadow: 'none' },
-            '&:focus-visible': { outline: '2px solid var(--accent)', outlineOffset: '-2px' },
-            '&:hover': { background: 'var(--nav-hover)' },
+            '&:focus-visible': { outline: '2px solid var(--st-accent)', outlineOffset: '-2px' },
+            '&:hover': { background: 'var(--st-nav-hover)' },
         },
         // Clerk puts the name before the avatar; flip it so the avatar leads
-        userButtonBox: { flexDirection: 'row-reverse', gap: '12px', color: 'var(--ink)' },
-        userButtonOuterIdentifier: { fontSize: '14px', fontWeight: 700, padding: 0, color: 'var(--ink)' },
+        userButtonBox: { flexDirection: 'row-reverse', gap: '12px', color: 'var(--st-ink)' },
+        userButtonOuterIdentifier: { fontSize: '14px', fontWeight: 700, padding: 0, color: 'var(--st-ink)' },
         userButtonAvatarBox: { width: '38px', height: '38px' },
     },
 }
@@ -48,7 +48,7 @@ function SignedInCard() {
 
     return (
         <div className={`${cardClass} overflow-hidden`}>
-            <div className="flex items-baseline gap-2.5 border-b border-line-soft px-3.5 py-3">
+            <div className="flex items-baseline gap-2.5 border-b border-st-line-soft px-3.5 py-3">
                 <IglooMark width={44} height={21} crop="tight" />
                 <Wordmark size="sm" />
             </div>
@@ -56,12 +56,12 @@ function SignedInCard() {
                 <UserButton showName appearance={userButtonAppearance} />
                 <ChevronsUpDown
                     aria-hidden="true"
-                    className="pointer-events-none absolute top-1/2 right-3.5 size-4 -translate-y-1/2 text-muted"
+                    className="pointer-events-none absolute top-1/2 right-3.5 size-4 -translate-y-1/2 text-st-muted"
                 />
             </div>
             {/* handy while standing Clerk up; dev builds only, never shown in production */}
             {import.meta.env.DEV && (
-                <p className="m-0 truncate border-t border-line-soft px-3.5 py-1.5 font-mono text-[11px] text-muted" title={user.id}>
+                <p className="m-0 truncate border-t border-st-line-soft px-3.5 py-1.5 font-mono text-[11px] text-st-muted" title={user.id}>
                     dev · {user.id}
                 </p>
             )}
@@ -92,7 +92,7 @@ function UnconfiguredAuthCard() {
         <div className="flex flex-col gap-2">
             <SignedOutCard note="(click to sign in)" onClick={() => setExplained(true)} />
             {explained && (
-                <p role="status" className="px-1 text-[12.5px] leading-snug text-muted">
+                <p role="status" className="px-1 text-[12.5px] leading-snug text-st-muted">
                     Sign-in isn't set up yet: add <code className="font-mono">VITE_CLERK_PUBLISHABLE_KEY</code> to{' '}
                     <code className="font-mono">.env.local</code>.
                 </p>

@@ -18,7 +18,7 @@ export default function AppLayout() {
             <Backdrop />
 
             <div className="relative z-10 flex h-full flex-col md:flex-row">
-                <header className="flex items-center justify-between gap-3 border-b border-line bg-sidebar px-4 py-2 backdrop-blur-md md:hidden">
+                <header className="flex items-center justify-between gap-3 border-b border-st-line bg-st-sidebar px-4 py-2 backdrop-blur-md md:hidden">
                     <span className="flex items-baseline gap-2.5">
                         <IglooMark width={40} height={19} crop="tight" />
                         <Wordmark size="sm" />
@@ -28,7 +28,7 @@ export default function AppLayout() {
                         aria-label="Open menu"
                         aria-expanded={menuOpen}
                         onClick={() => setMenuOpen(true)}
-                        className="grid size-11 cursor-pointer place-items-center rounded-xl text-ink-2 hover:bg-nav-hover"
+                        className="grid size-11 cursor-pointer place-items-center rounded-xl text-st-ink-2 hover:bg-st-nav-hover"
                     >
                         <Menu aria-hidden="true" className="size-5" />
                     </button>
@@ -40,7 +40,7 @@ export default function AppLayout() {
                 <aside
                     className={clsx(
                         // the slide-over needs an opaque ground; on desktop the translucent sidebar shows the backdrop
-                        'fixed inset-y-0 left-0 z-40 w-[280px] max-w-[85vw] bg-page transition-transform duration-200 md:static md:z-auto md:w-[268px] md:max-w-none md:shrink-0 md:translate-x-0 md:bg-transparent',
+                        'fixed inset-y-0 left-0 z-40 w-[280px] max-w-[85vw] bg-st-page transition-transform duration-200 md:static md:z-auto md:w-[268px] md:max-w-none md:shrink-0 md:translate-x-0 md:bg-transparent',
                         menuOpen ? 'translate-x-0' : '-translate-x-full'
                     )}
                 >
@@ -49,7 +49,7 @@ export default function AppLayout() {
                             type="button"
                             aria-label="Close menu"
                             onClick={closeMenu}
-                            className="absolute top-3 right-3 z-10 grid size-11 cursor-pointer place-items-center rounded-xl text-ink-2 hover:bg-nav-hover md:hidden"
+                            className="absolute top-3 right-3 z-10 grid size-11 cursor-pointer place-items-center rounded-xl text-st-ink-2 hover:bg-st-nav-hover md:hidden"
                         >
                             <X aria-hidden="true" className="size-5" />
                         </button>

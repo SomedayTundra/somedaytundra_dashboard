@@ -1,5 +1,5 @@
 @import "tailwindcss";
-/* both themes' tokens, the Tailwind names for them (bg-surface, text-ink, …) and the backdrops */
+/* both themes' tokens, the Tailwind names for them (bg-st-surface, text-st-ink, …) and the backdrops */
 @import "@somedaytundra/theme/theme.css";
 
 html,
@@ -10,8 +10,8 @@ body,
 
 body {
     margin: 0;
-    background: var(--page);
-    color: var(--ink);
+    background: var(--st-page);
+    color: var(--st-ink);
     /* no font-family here: Tailwind's base styles already use the theme's --font-sans (Manrope) */
     -webkit-font-smoothing: antialiased;
 }
