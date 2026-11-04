@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-type LocalStorageOptions<T> = {
+export type LocalStorageOptions<T> = {
     serialize?: (value: T) => string
     deserialize?: (raw: string) => T
 }

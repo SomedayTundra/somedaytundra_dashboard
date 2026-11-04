@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useLocalStorageState } from '@/lib/useLocalStorageState.ts'
+import { type LocalStorageOptions, useLocalStorageState } from '@/lib/useLocalStorageState.ts'
 import { ThemeContext } from './themeContext.ts'
 import { isMotionId, isThemeId, type MotionId, type ThemeId } from './themes.ts'
 
@@ -16,14 +16,14 @@ function prefersReducedMotion() {
 }
 
 // a stored value from an older build (or a hand edit) that isn't a known id falls back to the default
-const themeStorage = {
+const themeStorage: LocalStorageOptions<ThemeId> = {
     deserialize: (raw: string): ThemeId => {
         const parsed: unknown = JSON.parse(raw)
         return isThemeId(parsed) ? parsed : 'glacier-forest'
     },
 }
 
-const motionStorage = {
+const motionStorage: LocalStorageOptions<MotionId> = {
     deserialize: (raw: string): MotionId => {
         const parsed: unknown = JSON.parse(raw)
         return isMotionId(parsed) ? parsed : 'always'
