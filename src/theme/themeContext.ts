@@ -8,6 +8,8 @@ export type ThemeContextValue = {
     setMotion: (motion: MotionId) => void
     // the motion setting resolved against the OS reduce-motion preference
     animated: boolean
+    // the on/off switch: off is 'off'; on restores the last on-mode
+    setAnimated: (on: boolean) => void
 }
 
 export const ThemeContext = React.createContext<ThemeContextValue | null>(null)

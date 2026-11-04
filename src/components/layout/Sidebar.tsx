@@ -3,6 +3,7 @@ import type * as React from 'react'
 import { Link } from '@tanstack/react-router'
 import { Bus, ChartColumn, ChevronDown, CircleHelp, Code, ExternalLink, FileText, House, LayoutGrid, SlidersHorizontal } from 'lucide-react'
 import AuthCard from '@/components/auth/AuthCard.tsx'
+import { useFamilyAccess } from '@/lib/family.ts'
 import { BULLDOG_SHUTTLE_URL, NHL_STATS_URL } from '@/lib/links.ts'
 import { useLocalStorageState } from '@/lib/useLocalStorageState.ts'
 
@@ -43,6 +44,8 @@ const childIconClass = 'size-[17px]'
 
 export default function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
     const [projectsOpen, setProjectsOpen] = useLocalStorageState('st.sidebar.projectsOpen', true)
+    // the Blog is family-only, so only family members see it in the nav
+    const showBlog = useFamilyAccess() === 'granted'
 
     return (
         <nav
@@ -54,7 +57,9 @@ export default function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
 
                 <div className="flex flex-col gap-0.5">
                     <NavLink to="/" exact icon={<House aria-hidden="true" className={iconClass} />} label="Home" onNavigate={onNavigate} />
-                    <NavLink to="/blog" icon={<FileText aria-hidden="true" className={iconClass} />} label="Blog" onNavigate={onNavigate} />
+                    {showBlog && (
+                        <NavLink to="/blog" icon={<FileText aria-hidden="true" className={iconClass} />} label="Blog" onNavigate={onNavigate} />
+                    )}
                     <button
                         type="button"
                         className={navItem}

@@ -31,15 +31,6 @@ export const THEMES: Record<ThemeId, ThemeInfo> = {
     },
 }
 
-export const MOTION_LABELS: Record<MotionId, { name: string; description: string }> = {
-    always: { name: 'Always animate', description: 'Snow and aurora always move.' },
-    system: {
-        name: 'Follow my system setting',
-        description: 'Stay still when your device asks apps to reduce motion.',
-    },
-    off: { name: 'Off', description: 'Backgrounds never move.' },
-}
-
 export function isThemeId(value: unknown): value is ThemeId {
     return typeof value === 'string' && (THEME_IDS as readonly string[]).includes(value)
 }

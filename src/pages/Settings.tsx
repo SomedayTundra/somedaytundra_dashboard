@@ -1,9 +1,10 @@
 import type * as React from 'react'
+import clsx from 'clsx'
 import { Show, SignOutButton, useClerk, useUser } from '@clerk/react'
 import IglooMark from '@/components/brand/IglooMark.tsx'
 import { CLERK_ENABLED } from '@/lib/clerk.ts'
 import { useTheme } from '@/theme/themeContext.ts'
-import { MOTION_IDS, MOTION_LABELS, THEME_IDS, THEMES, type ThemeId } from '@/theme/themes.ts'
+import { THEME_IDS, THEMES, type ThemeId } from '@/theme/themes.ts'
 
 const panel = 'flex flex-col gap-5 rounded-[18px] border border-line bg-surface p-[22px] sm:p-7'
 const optionCard =
@@ -33,7 +34,8 @@ function Legend({ children }: { children: React.ReactNode }) {
 }
 
 function AppearanceSettings() {
-    const { theme, setTheme, motion, setMotion } = useTheme()
+    const { theme, setTheme, motion, setMotion, animated, setAnimated } = useTheme()
+    const animationOn = motion !== 'off'
     return (
         <section className={panel}>
             <SectionHeader title="Appearance" description="Your choices are saved in this browser, and to your account when you're signed in." />
@@ -68,24 +70,55 @@ function AppearanceSettings() {
             </fieldset>
 
             <fieldset className="m-0 border-0 p-0">
-                <Legend>Background motion</Legend>
+                <Legend>Background animation</Legend>
                 <div className="flex flex-col gap-2">
-                    {MOTION_IDS.map((id) => (
-                        <label key={id} className={`${optionCard} items-center py-3`}>
+                    <label className={`${optionCard} items-center justify-between py-3`}>
+                        <span className="flex flex-col">
+                            <span className="text-[14.5px] font-bold">Animate backgrounds</span>
+                            <span className="text-[13px] text-muted">
+                                {animationOn ? 'Snow falls and the aurora moves.' : 'Backgrounds stay still.'}
+                            </span>
+                        </span>
+                        <input
+                            type="checkbox"
+                            role="switch"
+                            checked={animationOn}
+                            onChange={(e) => setAnimated(e.target.checked)}
+                            className="sr-only"
+                        />
+                        <span
+                            aria-hidden="true"
+                            className={clsx(
+                                'relative h-6 w-11 shrink-0 rounded-full border transition-colors',
+                                animationOn ? 'border-accent bg-accent' : 'border-line bg-nav-hover'
+                            )}
+                        >
+                            <span
+                                className={clsx(
+                                    'absolute top-0.5 size-[18px] rounded-full bg-surface shadow transition-[left]',
+                                    animationOn ? 'left-[22px]' : 'left-0.5'
+                                )}
+                            />
+                        </span>
+                    </label>
+                    {animationOn && (
+                        <label className={`${optionCard} items-center py-3`}>
                             <input
-                                type="radio"
-                                name="motion"
-                                value={id}
-                                checked={motion === id}
-                                onChange={() => setMotion(id)}
+                                type="checkbox"
+                                checked={motion === 'system'}
+                                onChange={(e) => setMotion(e.target.checked ? 'system' : 'always')}
                                 className="size-4 accent-[var(--accent)]"
                             />
                             <span className="flex flex-col">
-                                <span className="text-[14.5px] font-bold">{MOTION_LABELS[id].name}</span>
-                                <span className="text-[13px] text-muted">{MOTION_LABELS[id].description}</span>
+                                <span className="text-[14.5px] font-bold">Follow my system setting</span>
+                                <span className="text-[13px] text-muted">
+                                    {motion === 'system' && !animated
+                                        ? 'Paused right now: your device is asking apps to reduce motion.'
+                                        : 'Stay still when your device asks apps to reduce motion.'}
+                                </span>
                             </span>
                         </label>
-                    ))}
+                    )}
                 </div>
             </fieldset>
         </section>

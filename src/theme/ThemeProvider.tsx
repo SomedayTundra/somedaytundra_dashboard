@@ -43,9 +43,24 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     const animated = motion === 'always' || (motion === 'system' && !reduceMotion)
 
+    // remembered so switching animation back on restores "follow my system" rather than discarding it
+    const lastOnMotion = React.useRef<MotionId>(motion === 'off' ? 'always' : motion)
+    React.useEffect(() => {
+        if (motion !== 'off') lastOnMotion.current = motion
+    }, [motion])
+
+    const setAnimated = React.useCallback(
+        (on: boolean) => {
+            if (!on) setMotion('off')
+            // turning it on should visibly animate, so "system" only comes back if the OS allows motion
+            else setMotion(lastOnMotion.current === 'system' && !reduceMotion ? 'system' : 'always')
+        },
+        [setMotion, reduceMotion]
+    )
+
     const value = React.useMemo(
-        () => ({ theme, setTheme, motion, setMotion, animated }),
-        [theme, setTheme, motion, setMotion, animated]
+        () => ({ theme, setTheme, motion, setMotion, animated, setAnimated }),
+        [theme, setTheme, motion, setMotion, animated, setAnimated]
     )
 
     return <ThemeContext value={value}>{children}</ThemeContext>

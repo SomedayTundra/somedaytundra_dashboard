@@ -2,6 +2,7 @@ import type * as React from 'react'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight, Bell, Bus, ChartColumn, Code, ExternalLink, Search } from 'lucide-react'
 import ThemeToggle from '@/components/ThemeToggle.tsx'
+import { useFamilyAccess } from '@/lib/family.ts'
 import { BULLDOG_SHUTTLE_URL, NHL_STATS_URL } from '@/lib/links.ts'
 
 const panel = 'rounded-[18px] border border-line bg-surface'
@@ -79,6 +80,9 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 }
 
 export default function Home() {
+    // Blog posts and Blog activity are family-only, like the Blog page itself
+    const family = useFamilyAccess() === 'granted'
+    const activity = family ? ACTIVITY : ACTIVITY.filter((item) => item.source !== 'Blog')
     return (
         <div className="flex flex-col gap-7 px-4 pt-7 pb-[170px] sm:px-[clamp(16px,3vw,44px)]">
             <div className="flex flex-wrap items-center justify-between gap-3.5">
@@ -154,26 +158,28 @@ export default function Home() {
             </section>
 
             <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
-                <section className={`${panel} flex flex-col gap-1.5 p-[22px]`}>
-                    <SectionHeading>Recent posts</SectionHeading>
-                    <ul className="m-0 mt-2 list-none p-0">
-                        {POSTS.map((title) => (
-                            <li key={title}>
-                                <Link
-                                    to="/blog"
-                                    className="flex justify-between gap-4 border-t border-line-soft py-3 text-ink no-underline"
-                                >
-                                    <span className="text-[14.5px] font-bold">{title}</span>
-                                    <span className="shrink-0 text-[13px] text-muted">[Date]</span>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </section>
+                {family && (
+                    <section className={`${panel} flex flex-col gap-1.5 p-[22px]`}>
+                        <SectionHeading>Recent posts</SectionHeading>
+                        <ul className="m-0 mt-2 list-none p-0">
+                            {POSTS.map((title) => (
+                                <li key={title}>
+                                    <Link
+                                        to="/blog"
+                                        className="flex justify-between gap-4 border-t border-line-soft py-3 text-ink no-underline"
+                                    >
+                                        <span className="text-[14.5px] font-bold">{title}</span>
+                                        <span className="shrink-0 text-[13px] text-muted">[Date]</span>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
                 <section className={`${panel} flex flex-col gap-3.5 p-[22px]`}>
                     <SectionHeading>Lorem activity</SectionHeading>
                     <ul className="m-0 flex list-none flex-col gap-3.5 p-0">
-                        {ACTIVITY.map((item) => (
+                        {activity.map((item) => (
                             <li key={item.title} className="flex items-start gap-3">
                                 <span aria-hidden="true" className={`mt-1.5 size-[9px] shrink-0 rounded-full ${item.dot}`} />
                                 <span className="flex flex-col gap-0.5">

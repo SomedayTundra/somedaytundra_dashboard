@@ -56,3 +56,8 @@ Bulldog Shuttle (the next free port, 5174 when NHL Stats is up).
 - Clerk's screens are themed to match the current theme (`ClerkThemedProvider.tsx`).
 - Theme and motion choices are saved to the signed-in user's Clerk `unsafeMetadata.preferences`,
   so they follow the user to other browsers. Those values win on sign-in.
+- The Blog is family-only: it's shown to members of the Clerk organization whose slug is
+  `VITE_FAMILY_ORG_SLUG` (default `family`), via `useFamilyAccess()` in `src/lib/family.ts`.
+  Everyone else gets no Blog nav link, no Blog items on Home, and a "for family" page at `/blog`.
+  That's display only: when real posts exist, the server that sends them must check the same
+  membership from the Clerk session token.

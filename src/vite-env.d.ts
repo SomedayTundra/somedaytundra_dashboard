@@ -4,6 +4,7 @@ interface ImportMetaEnv {
     readonly VITE_CLERK_PUBLISHABLE_KEY?: string
     readonly VITE_NHL_STATS_URL?: string
     readonly VITE_BULLDOG_SHUTTLE_URL?: string
+    readonly VITE_FAMILY_ORG_SLUG?: string
 }
 
 interface ImportMeta {

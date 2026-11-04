@@ -40,26 +40,31 @@ type StoredPreferences = { theme?: unknown; motion?: unknown }
 function PreferenceSync() {
     const { user } = useUser()
     const { theme, setTheme, motion, setMotion } = useTheme()
-    // which user's stored preferences have been applied; saving waits for this so a fresh sign-in
-    // doesn't overwrite their stored theme with whatever this browser had
-    const [syncedUserId, setSyncedUserId] = React.useState<string | null>(null)
+    // which user's stored preferences have been applied, so a fresh sign-in takes their stored theme
+    // instead of overwriting it with whatever this browser had
+    const syncedUserId = React.useRef<string | null>(null)
 
     React.useEffect(() => {
-        if (!user || syncedUserId === user.id) return
+        if (!user) {
+            syncedUserId.current = null
+            return
+        }
         const stored = user.unsafeMetadata.preferences as StoredPreferences | undefined
-        if (isThemeId(stored?.theme)) setTheme(stored.theme)
-        if (isMotionId(stored?.motion)) setMotion(stored.motion)
-        setSyncedUserId(user.id)
-    }, [user, syncedUserId, setTheme, setMotion])
-
-    React.useEffect(() => {
-        if (!user || syncedUserId !== user.id) return
-        const stored = user.unsafeMetadata.preferences as StoredPreferences | undefined
-        if (stored?.theme === theme && stored?.motion === motion) return
-        user.update({ unsafeMetadata: { ...user.unsafeMetadata, preferences: { theme, motion } } }).catch(() => {
+        let nextTheme = theme
+        let nextMotion = motion
+        if (syncedUserId.current !== user.id) {
+            syncedUserId.current = user.id
+            if (isThemeId(stored?.theme)) nextTheme = stored.theme
+            if (isMotionId(stored?.motion)) nextMotion = stored.motion
+            setTheme(nextTheme)
+            setMotion(nextMotion)
+        }
+        // also saves whatever the account didn't have yet, e.g. on a first sign-in
+        if (stored?.theme === nextTheme && stored?.motion === nextMotion) return
+        user.update({ unsafeMetadata: { ...user.unsafeMetadata, preferences: { theme: nextTheme, motion: nextMotion } } }).catch(() => {
             // not being able to save a display preference shouldn't interrupt anything
         })
-    }, [user, syncedUserId, theme, motion])
+    }, [user, theme, motion, setTheme, setMotion])
 
     return null
 }
