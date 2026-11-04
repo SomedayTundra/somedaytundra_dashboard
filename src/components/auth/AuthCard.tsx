@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { ClerkLoading, Show, UserButton, useClerk, useUser } from '@clerk/react'
 import { ChevronsUpDown } from 'lucide-react'
-import IglooMark from '@/components/brand/IglooMark.tsx'
-import Wordmark from '@/components/brand/Wordmark.tsx'
+import { IglooMark, Wordmark } from '@somedaytundra/theme'
 import { CLERK_ENABLED } from '@/lib/clerk.ts'
 
 const cardClass = 'w-full rounded-2xl border border-line bg-surface shadow-card'

@@ -1,10 +1,8 @@
 import type * as React from 'react'
 import clsx from 'clsx'
 import { Show, SignOutButton, useClerk, useUser } from '@clerk/react'
-import IglooMark from '@/components/brand/IglooMark.tsx'
+import { IglooMark, THEME_IDS, THEMES, type ThemeId, useTheme } from '@somedaytundra/theme'
 import { CLERK_ENABLED } from '@/lib/clerk.ts'
-import { useTheme } from '@/theme/themeContext.ts'
-import { THEME_IDS, THEMES, type ThemeId } from '@/theme/themes.ts'
 
 const panel = 'flex flex-col gap-5 rounded-[18px] border border-line bg-surface p-[22px] sm:p-7'
 const optionCard =

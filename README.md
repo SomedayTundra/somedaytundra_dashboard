@@ -15,6 +15,19 @@ cp .env.example .env.local   # then fill in the values below
 npm run dev                  # http://localhost:5180
 ```
 
+The themes come from [`@somedaytundra/theme`](https://github.com/SomedayTundra/somedaytundra_theme).
+`package.json` pins a tagged GitHub release, and builds always use it. The dev server instead
+uses a sibling checkout at `../somedaytundra_theme` when one exists and has been built, so theme
+edits show up without tagging a release. It prints "using the local theme" when it does.
+TypeScript follows the same rule via `paths` in `tsconfig.app.json`.
+
+- Working on the theme: run `npm run dev` in `../somedaytundra_theme` too. It rebuilds on save,
+  and the dashboard reloads with the change.
+- Trying the published release in dev: `ST_THEME_SOURCE=github npm run dev` (in PowerShell,
+  `$env:ST_THEME_SOURCE='github'; npm run dev`).
+- Releasing a theme change: tag it in the theme repo, then bump the `#vX.Y.Z` in this
+  `package.json` and run `npm install`.
+
 | Variable | What it's for |
 |---|---|
 | `VITE_CLERK_PUBLISHABLE_KEY` | Clerk's `pk_test_…`/`pk_live_…` key. Unset, the app runs signed-out only. |
@@ -34,28 +47,30 @@ Bulldog Shuttle (the next free port, 5174 when NHL Stats is up).
 
 ## Themes
 
-- Colors are CSS custom properties set per `<html data-theme="…">` in `src/index.css`, exposed to
-  Tailwind as `bg-surface`, `text-ink`, `text-muted` and so on. Components never hard-code a
-  theme's colors, so adding a theme means a new token block plus an entry in
-  `src/theme/themes.ts`.
-- `ThemeProvider` keeps the theme and the background-motion setting (always / follow the OS
-  reduce-motion setting / off) in localStorage under `st.theme` and `st.motion`. `index.html`
-  reads the same keys before first paint, so a reload doesn't flash the wrong theme.
-- You can switch themes from the toggle on Home or from Settings › Appearance.
-- The backdrops (`src/components/backdrop/`) are generated deterministically. Both themes share
-  one tree line (`treeline.ts`). Glacier Forest redraws every other tree in front of the near
-  snow, so flakes fall in front of some trees and behind others.
+- Everything theme-related lives in `@somedaytundra/theme`: the color tokens for both themes
+  (`theme.css`, imported by `src/index.css`), `ThemeProvider`/`useTheme`, `ThemeToggle`, the
+  backdrops, `IglooMark` and `Wordmark`, and the Clerk colors. Its README has the details. What
+  stays here is the dashboard's own UI, including the theme cards in Settings › Appearance.
+- Pages use the theme's Tailwind names (`bg-surface`, `text-ink`, `text-muted` and so on), never a
+  theme's raw colors.
+- The theme and motion setting persist in localStorage under `st.theme` and `st.motion`. The
+  `somedaytundraTheme()` plugin in `vite.config.ts` applies them before first paint, so a reload
+  doesn't flash the wrong theme.
+- `vite.config.ts` dedupes React and Clerk, because the local theme checkout has its own dev
+  copies of both.
 
 ## Clerk
 
 - The sidebar's top card shows the ST logo with "(click to sign in)", which opens Clerk's sign-in
-  modal. Signed in, it shows Clerk's `UserButton` (avatar and account menu) with the user's name
-  and id.
+  modal. Signed in, it shows Clerk's `UserButton` (avatar and account menu) with the user's name.
+  The `user_…` id is shown only in dev builds.
 - Settings › Account has Manage account (Clerk's profile modal), Sign out, Sign in and Create
   account.
-- Clerk's screens are themed to match the current theme (`ClerkThemedProvider.tsx`).
-- Theme and motion choices are saved to the signed-in user's Clerk `unsafeMetadata.preferences`,
-  so they follow the user to other browsers. Those values win on sign-in.
+- Clerk's screens are themed to match the current theme (`ClerkThemedProvider.tsx`, using the
+  package's `clerkAppearance()`).
+- Theme and motion choices are saved to the signed-in user's Clerk `unsafeMetadata.preferences`
+  by the package's `ThemePreferenceSync`, so they follow the user to other browsers. Those values
+  win on sign-in.
 - The Blog is family-only: it's shown to members of the Clerk organization whose slug is
   `VITE_FAMILY_ORG_SLUG` (default `family`), via `useFamilyAccess()` in `src/lib/family.ts`.
   Everyone else gets no Blog nav link, no Blog items on Home, and a "for family" page at `/blog`.

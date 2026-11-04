@@ -14,15 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     />
     <title>SomedayTundra</title>
-    <script>
-      // apply the saved theme before first paint so a reload doesn't flash the wrong one
-      try {
-        var t = JSON.parse(localStorage.getItem('st.theme') || 'null')
-        if (t === 'glacier-forest' || t === 'aurora') document.documentElement.dataset.theme = t
-        var m = JSON.parse(localStorage.getItem('st.motion') || 'null')
-        if (m === 'always' || m === 'system' || m === 'off') document.documentElement.dataset.motion = m
-      } catch (e) {}
-    </script>
+    <!-- the saved theme is applied before first paint by the somedaytundraTheme() plugin in vite.config.ts -->
   </head>
   <body>
     <div id="root"></div>

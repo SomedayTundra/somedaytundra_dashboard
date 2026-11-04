@@ -7,7 +7,11 @@
     "types": ["vite/client"],
     "skipLibCheck": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      // types from the local theme checkout when there is one (matching the dev server), else the
+      // installed GitHub release
+      "@somedaytundra/theme": ["../somedaytundra_theme/dist/index.d.ts", "./node_modules/@somedaytundra/theme/dist/index.d.ts"],
+      "@somedaytundra/theme/clerk": ["../somedaytundra_theme/dist/clerk.d.ts", "./node_modules/@somedaytundra/theme/dist/clerk.d.ts"]
     },
 
     /* Bundler mode */

@@ -1,7 +1,7 @@
 import type * as React from 'react'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight, Bell, Bus, ChartColumn, Code, ExternalLink, Search } from 'lucide-react'
-import ThemeToggle from '@/components/ThemeToggle.tsx'
+import { ThemeToggle } from '@somedaytundra/theme'
 import { useFamilyAccess } from '@/lib/family.ts'
 import { BULLDOG_SHUTTLE_URL, NHL_STATS_URL } from '@/lib/links.ts'
 

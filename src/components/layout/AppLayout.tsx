@@ -2,9 +2,7 @@ import clsx from 'clsx'
 import * as React from 'react'
 import { Outlet } from '@tanstack/react-router'
 import { Menu, X } from 'lucide-react'
-import Backdrop from '@/components/backdrop/Backdrop.tsx'
-import IglooMark from '@/components/brand/IglooMark.tsx'
-import Wordmark from '@/components/brand/Wordmark.tsx'
+import { Backdrop, IglooMark, Wordmark } from '@somedaytundra/theme'
 import Sidebar from './Sidebar.tsx'
 
 /**
