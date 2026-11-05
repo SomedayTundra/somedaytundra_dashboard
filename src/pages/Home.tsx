@@ -1,7 +1,8 @@
 import type * as React from 'react'
 import { Link } from '@tanstack/react-router'
-import { ArrowRight, Bell, Bus, ChartColumn, Code, ExternalLink, Search } from 'lucide-react'
+import { ArrowRight, Bell, Bus, Code, ExternalLink, Search } from 'lucide-react'
 import { ThemeToggle } from '@somedaytundra/theme'
+import PuckIcon from '@/components/icons/PuckIcon.tsx'
 import { useFamilyAccess } from '@/lib/family.ts'
 import { BULLDOG_SHUTTLE_URL, NHL_STATS_URL } from '@/lib/links.ts'
 
@@ -10,7 +11,7 @@ const panel = 'rounded-[18px] border border-st-line bg-st-surface'
 type Project = {
     name: string
     blurb: string
-    Icon: typeof Code
+    Icon: React.ComponentType<{ className?: string }>
     iconClass: string
     linkClass: string
 } & ({ href: string } | { to: string })
@@ -19,7 +20,7 @@ const PROJECTS: Project[] = [
     {
         name: 'NHL Stats',
         blurb: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.',
-        Icon: ChartColumn,
+        Icon: PuckIcon,
         iconClass: 'bg-st-proj-nhl-soft text-st-proj-nhl',
         linkClass: 'text-st-proj-nhl',
         href: NHL_STATS_URL,

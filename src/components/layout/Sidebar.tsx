@@ -1,8 +1,9 @@
 import clsx from 'clsx'
 import type * as React from 'react'
 import { Link } from '@tanstack/react-router'
-import { Bus, ChartColumn, ChevronDown, CircleHelp, Code, ExternalLink, FileText, House, LayoutGrid, SlidersHorizontal } from 'lucide-react'
+import { Bus, ChevronDown, CircleHelp, Code, ExternalLink, FileText, House, LayoutGrid, SlidersHorizontal } from 'lucide-react'
 import AuthCard from '@/components/auth/AuthCard.tsx'
+import PuckIcon from '@/components/icons/PuckIcon.tsx'
 import { useFamilyAccess } from '@/lib/family.ts'
 import { BULLDOG_SHUTTLE_URL, NHL_STATS_URL } from '@/lib/links.ts'
 import { useLocalStorageState } from '@/lib/useLocalStorageState.ts'
@@ -78,7 +79,7 @@ export default function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
                         <div id="sidebar-projects" className="mt-0.5 mb-1 ml-[21px] flex flex-col gap-0.5 border-l-[1.5px] border-st-line pl-3">
                             <ExternalNavLink
                                 href={NHL_STATS_URL}
-                                icon={<ChartColumn aria-hidden="true" className={clsx(childIconClass, 'text-st-proj-nhl')} />}
+                                icon={<PuckIcon aria-hidden="true" className={clsx(childIconClass, 'text-st-proj-nhl')} />}
                                 label="NHL Stats"
                             />
                             <ExternalNavLink
